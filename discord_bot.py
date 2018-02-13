@@ -1,41 +1,41 @@
 import discord
 import random
-import time
+import v_of_yorn
 import asyncio
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix= '>')
 
 @bot.command(pass_context=True)
-async def role(ctx):
-	if ctx = message.author
+async def role(ctx, memb):
+	if ctx = role
 		user = message.author
 		for member.roles:
 			if role.name != "<role name>":
 				await bot.say("Requesting promotion. Please wait for approval")
 				for role.name(<moderator>)
-					await client.send_message(channel.privat_mod_room, content=user "is requesting the <role name> role", *, tts=False, embed=None)
+					await client.send_message(channel.privat_mod_room, content=user + "is requesting the <role name> role", *, tts=False, embed=None)
 			else await bot.say("You are already a <role>!")
 
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(manage_roles=True)
-async def role(ctx, user, yorn):
-	if setmemb = ctx:
-		if yorn = yes:
+async def roleapprv(ctx, user, yorn):
+	if ctx == "setmemb":
+		if yorn = "yes":
 			add_roles(user, <role>)
 			await client.send_message(user, content="Your request for <role name> has been granted!", *, tts=False, embed=None)
-		elif yorn = no:
+		elif yorn = "no":
 			await client.send_message(user, content="Sorry, but your request for <role name> has been denied.", *, tts=False, embed=None)
 	
 @bot.command(pass_context=True)
-async def message(ctx):
-	if ctx == rmeme:
+async def redd(ctx):
+	if ctx == "rmeme":
 		await client.send_message(message.channel, content="Wow, a random meme appeared from */r/memes*!", *, tts=False, embed="www.reddit.com/r/memes/random")
-        if ctx == rrandom:
+        if ctx == "rrandom":
 		await client.send_message(message.channel, content="Get your daily dose of internet with a random *clean* post from Reddit!", *, tts=False, embed="www.reddit.com/random")
-        if ctx == rall:
+        if ctx == "rall":
 		await client.send_message(message.channel, content="Find your thing with recent top *clean* posts from **all** of Reddit!", *, tts=False, embed="www.reddit.com/random")
-        if ctx == r:
+        if ctx == "r":
 		reddit = "```Use the >r command to bring up a post (or Subreddit) from Reddit:" + "\n"
 		reddit += ">rall: Recent top posts from all of Reddit (clean)" + "\n"
 		reddit += ">rrandom: A random post from all of Reddit (clean)" + "\n"
@@ -49,18 +49,26 @@ async def message(ctx):
 		
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(manage_server=True)
-async def message(ctx):
-	while state == on:
-		await client.send_message(channel.memes, content=None, *, tts=False, embed="www.reddit.com/r/memes/random")
-	if ctx=memes:
-		if state == on:
-			state=off
-		if state == off:
-			state=on
+async def memes(ctx):
+	if ctx == "memes":
+		yornfm = v_of_yornfm.value(change)
+		if yorn == "yes":
+			m = 3600
+			while m	> 0:
+				if m > 0:
+					await asyncio.sleep(1)
+					m = m - 1
+				if m == 0:
+					await client.send_message(channel.memes, content=None, *, tts=False, embed="www.reddit.com/r/memes/random")
+					m = 3600
+				break
+		if yornfm == "no":
+			break
 		
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(mute_user=True)
 async def mute(ctx, user, hrs):
+	if ctx == "mute"
 	hrs * 3600 = t
 	while t	> 0:
 		if t > 0:
