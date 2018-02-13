@@ -22,15 +22,15 @@ async def member(ctx):
 async def setmemb(ctx, member, yorn):
 	if setmemb = ctx:
 		if yorn = yes:
-			add_roles(member, Wet Memer)
-			await client.send_message(user, content="Your request for <role name> has been granted!", *, tts=False, embed=None)
+			add_roles(member, <role>)
+			await client.send_message(member, content="Your request for <role name> has been granted!", *, tts=False, embed=None)
 		elif yorn = no:
-			client.send_message(user, content="Sorry, but your request for <role name> has been denied.", *, tts=False, embed=None)
+			await client.send_message(member, content="Sorry, but your request for <role name> has been denied.", *, tts=False, embed=None)
 	
 @bot.command(pass_context=True)
 async def meme(ctx)
 	if ctx = meme
-		await client.send_message(channel.channel, content="Wow, a random me appeared from */r/memes*!", *, tts=False, embed=www.reddit.com/r/memes/random)
+		await client.send_message(message.channel, content="Wow, a random me appeared from */r/memes*!", *, tts=False, embed=www.reddit.com/r/memes/random)
 
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(mute_user=True)
@@ -41,7 +41,7 @@ async def mute(ctx, user, hrs):
 			time.sleep(1)
 			t = t - 1
 	while t > 0:
-		if message.author == user:
+	        if message.author == user:
 			await client.delete_message(message)
 	await client.send_message(report, content=`***user*** **"was temporarily silenced for" x "hours"**`, *, tts=False, embed=None)
 
