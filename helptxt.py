@@ -1,6 +1,6 @@
 import discord
 import asyncio
-from discord import commands
+from discord.ext import commands
 
 async def run(h):
 	help = "```---Help Guide---" + "\n"
