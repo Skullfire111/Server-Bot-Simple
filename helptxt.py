@@ -28,3 +28,4 @@ async def run(h):
 	help += ">mute: Used to temporarily mute any amount of hours" + "\n"
 	help += "       The number of hours you wish to mute someone must be an integer" + "\n"
 	help += "```"
+	await bot.say(help)
