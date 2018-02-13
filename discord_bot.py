@@ -8,7 +8,7 @@ from discord.ext import commands
 bot = commands.Bot(command_prefix= '>')
 
 @bot.command(pass_context=True)
-async def help(h):
+async def helpcmnd(h):
 	if h == "" or if h == "h" or if h == "help":
 		helptxt.run(h)
 	
