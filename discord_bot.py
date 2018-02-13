@@ -38,7 +38,7 @@ async def mute(ctx, user, hrs):
 	hrs * 3600 = t
 	while t	> 0:
 		if t > 0:
-			time.sleep(1)
+			await asyncio.sleep(1)
 			t = t - 1
 	while t > 0:
 		if message.author == user:
