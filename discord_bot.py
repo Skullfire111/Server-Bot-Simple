@@ -1,14 +1,21 @@
 import discord
 import random
-import v_of_yorn
+import v_of_torf
+import helptxt
 import asyncio
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix= '>')
 
 @bot.command(pass_context=True)
-async def role(ctx, memb):
-	if ctx = role
+async def help(h):
+	if h == "" or if h == "h" or if h == "help":
+		helptxt.run(h)
+	
+
+@bot.command(pass_context=True)
+async def role(ctx):
+	if ctx == "<role>":
 		user = message.author
 		for member.roles:
 			if role.name != "<role name>":
@@ -21,10 +28,10 @@ async def role(ctx, memb):
 @checks.admin_or_permissions(manage_roles=True)
 async def roleapprv(ctx, user, yorn):
 	if ctx == "setmemb":
-		if yorn = "yes":
+		if yorn == "yes":
 			add_roles(user, <role>)
 			await client.send_message(user, content="Your request for <role name> has been granted!", *, tts=False, embed=None)
-		elif yorn = "no":
+		elif yorn == "no":
 			await client.send_message(user, content="Sorry, but your request for <role name> has been denied.", *, tts=False, embed=None)
 	
 @bot.command(pass_context=True)
@@ -51,8 +58,8 @@ async def redd(ctx):
 @checks.admin_or_permissions(manage_server=True)
 async def memes(ctx):
 	if ctx == "memes":
-		yornfm = v_of_yornfm.value(change)
-		if yorn == "yes":
+		torf = v_of_torf.torfv(change)
+		if torf == True:
 			m = 3600
 			while m	> 0:
 				if m > 0:
@@ -62,14 +69,14 @@ async def memes(ctx):
 					await client.send_message(channel.memes, content=None, *, tts=False, embed="www.reddit.com/r/memes/random")
 					m = 3600
 				break
-		if yornfm == "no":
+		if torf == False:
 			break
 		
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(mute_user=True)
 async def mute(ctx, user, hrs):
 	if ctx == "mute"
-	hrs * 3600 = t
+	t = hrs * 3600
 	while t	> 0:
 		if t > 0:
 			await asyncio.sleep(1)
