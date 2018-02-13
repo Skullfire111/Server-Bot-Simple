@@ -69,7 +69,7 @@ async def mute(ctx, user, hrs):
 	while t > 0:
 		if message.author == user:
 			await client.delete_message(message)
-	await client.send_message(report, content=`***user*** **"was temporarily silenced for" x "hours"**`, *, tts=False, embed=None)
+	await client.send_message(report, content=user "**was temporarily silenced for" x "hours**"`, *, tts=False, embed=None)
 
 bot.run("<token>")
 
