@@ -43,7 +43,7 @@ async def redd(ctx):
         if ctx == "rall":
 		await client.send_message(message.channel, content="Find your thing with recent top *clean* posts from **all** of Reddit!", *, tts=False, embed="www.reddit.com/random")
         if ctx == "r":
-		reddit = "```Use the >r command to bring up a post (or Subreddit) from Reddit:" + "\n"
+		reddit = "```Use the >r branch of commands to bring up a post (or Subreddit) from Reddit:" + "\n"
 		reddit += ">rall: Recent top posts from all of Reddit (clean)" + "\n"
 		reddit += ">rrandom: A random post from all of Reddit (clean)" + "\n"
 		reddit += ">rmeme: A random post from the /r/memes Subreddit (possibly NSFW)" + "\n"
