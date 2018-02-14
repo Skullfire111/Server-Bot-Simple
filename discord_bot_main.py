@@ -33,7 +33,7 @@ async def role(ctx):
 
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(manage_roles=True)
-async def setmemb(ctx, *, user : str=None, *, yorn : str=None):
+async def setmemb(ctx, user = None, yorn = None):
 	if yorn == "yes":
 		add_roles(user, <role>)
 		await client.send_message(user, content="Your request for <role name> has been granted!", *, tts=False, embed=None)
