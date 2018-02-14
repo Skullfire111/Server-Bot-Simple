@@ -21,20 +21,19 @@ async def clap(ctx, *, sentence : str = None):
 					
 @bot.command(pass_context=True)
 async def <role>(ctx):
-	if ctx is "<role>":
-		user = message.author
-		for member.roles:
-			if role.name not "<role>":
-				await bot.say("Requesting promotion. Please wait for approval")
-				for role.name(<moderator>)
-					await client.send_message(channel.privat_mod_room, content=user + "is requesting the <role name> role", *, tts=False, embed=None)
-			else await bot.say("You are already a <role>!")
+	user = message.author
+	for member.roles:
+		if role.name not "<role>":
+			await bot.say("Requesting promotion. Please wait for approval")
+			for role.name(<moderator>)
+				await client.send_message(channel.<"yourmodchannelhere">, content=user + "is requesting the <role name> role", *, tts=False, embed=None)
+		else await bot.say("You are already a <role>!")
 
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(manage_roles=True)
 async def givememb(ctx, user = None, yorn = None):
 	if yorn is None or if user is None:
-		await bot.say('Correct use of this function is: >setmemb <@person> <yes/no>'):
+		await bot.say('Correct use of this function is: >setmemb <@person> <yes/no>')
 	else:
 		if yorn is "yes":
 			add_roles(user, <role>)
@@ -44,29 +43,29 @@ async def givememb(ctx, user = None, yorn = None):
 
 @bot.command(pass_context=True)
 async def r(ctx):
-	if ctx == "rmeme":
+	if reddit is meme:
 		await client.send_message(message.channel, content="Wow, a random meme appeared from */r/memes*!", *, tts=False, embed="www.reddit.com/r/memes/random")
-        if ctx == "rrandom":
+	if reddit is random:
 		await client.send_message(message.channel, content="Get your daily dose of internet with a random *clean* post from Reddit!", *, tts=False, embed="www.reddit.com/random")
-        if ctx == "rall":
+	if reddit is all:
 		await client.send_message(message.channel, content="Find your thing with recent top *clean* posts from **all** of Reddit!", *, tts=False, embed="www.reddit.com/random")
-        if ctx == "r":
+	if reddit is None:
 		reddit = "```Use the >r branch of commands to bring up a post (or Subreddit) from Reddit:" + "\n"
-		reddit += ">rall: Recent top posts from all of Reddit (clean)" + "\n"
-		reddit += ">rrandom: A random post from all of Reddit (clean)" + "\n"
-		reddit += ">rmeme: A random post from the /r/memes Subreddit (possibly NSFW)" + "\n"
+		reddit += ">r all: Recent top posts from all of Reddit (clean)" + "\n"
+		reddit += ">r random: A random post from all of Reddit (clean)" + "\n"
+		reddit += ">r meme: A random post from the /r/memes Subreddit (possibly NSFW)" + "\n"
 		reddit += "\n"
 		reddit += "-Admins Only-" + "\n"
 		reddit += ">memes: Toggle on/off random hourly posts from /r/memes" + "\n"
 		reddit += "```"
 		await bot.say(reddit)
-         
+
 		
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(manage_server=True)
 async def memes(ctx):
 	torf = v_of_torf.torfv(change)
-	if torf == True:
+	if torf is True:
 		m = 3600
 		while m	> 0:
 			if m > 0:
@@ -76,14 +75,14 @@ async def memes(ctx):
 				await client.send_message(channel.memes, content=None, *, tts=False, embed="www.reddit.com/r/memes/random")
 				m = 3600
 			break
-	if torf == False:
+	if torf is False:
 		break
 		
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(mute_user=True)
 async def mute(ctx, user = None, hrs = None):
 	if user is None or if hrs is None:
-		bot.say('Correct usage is: >mute <@person> <hours>
+		bot.say('Correct usage is: >mute <@person> <hours>')
 	else:
 		t = hrs * 3600
 		while t	> 0:
