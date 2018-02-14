@@ -11,8 +11,16 @@ bot = commands.Bot(command_prefix= '>')
 async def helpcmnd(h):
 	if h == "" or if h == "h" or if h == "help":
 		helptxt.run(h)
-	
-
+		
+@bot.command(pass_context=True)
+async def clap(clap, string):
+	if clap == "clap":
+		for i in list(string):
+			b = '\U1F44F'
+			string[i] = b.decode('unicode-escape')
+			"".join(string)
+			await bot.say(string)
+					
 @bot.command(pass_context=True)
 async def role(ctx):
 	if ctx == "<role>":
