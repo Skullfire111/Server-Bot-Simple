@@ -24,7 +24,7 @@ async def role(ctx):
 	if ctx is "<role>":
 		user = message.author
 		for member.roles:
-			if role.name != "<role name>":
+			if role.name not "<role>":
 				await bot.say("Requesting promotion. Please wait for approval")
 				for role.name(<moderator>)
 					await client.send_message(channel.privat_mod_room, content=user + "is requesting the <role name> role", *, tts=False, embed=None)
