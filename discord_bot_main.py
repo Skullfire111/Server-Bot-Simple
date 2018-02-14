@@ -20,7 +20,7 @@ async def clap(ctx, *, sentence : str = None):
         await bot.say(sentence)
 					
 @bot.command(pass_context=True)
-async def role(ctx):
+async def <role>(ctx):
 	if ctx is "<role>":
 		user = message.author
 		for member.roles:
