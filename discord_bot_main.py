@@ -13,13 +13,12 @@ async def helpcmnd(h):
 		helptxt.run(h)
 		
 @bot.command(pass_context=True)
-async def clap(clap, string):
-	if clap == "clap":
-		for i in list(string):
-			b = '\U1F44F'
-			string[i] = b.decode('unicode-escape')
-			"".join(string)
-			await bot.say(string)
+async def clap(ctx, *, sentence : str = None):
+    if sentence is None:
+        await bot.say('You have to say anything before this command works')
+    else:
+        sentence = sentence.replace(' ', ':clap:')
+        await bot.say(sentence)
 					
 @bot.command(pass_context=True)
 async def role(ctx):
@@ -34,14 +33,15 @@ async def role(ctx):
 
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(manage_roles=True)
-async def roleapprv(ctx, user, yorn):
-	if ctx == "setmemb":
-		if yorn == "yes":
-			add_roles(user, <role>)
-			await client.send_message(user, content="Your request for <role name> has been granted!", *, tts=False, embed=None)
-		elif yorn == "no":
-			await client.send_message(user, content="Sorry, but your request for <role name> has been denied.", *, tts=False, embed=None)
-	
+async def setmemb(ctx, *, user : str=None, *, yorn : str=None):
+	if yorn == "yes":
+		add_roles(user, <role>)
+		await client.send_message(user, content="Your request for <role name> has been granted!", *, tts=False, embed=None)
+	elif yorn == "no":
+		await client.send_message(user, content="Sorry, but your request for <role name> has been denied.", *, tts=False, embed=None)
+	if yorn is None or if user is None:
+		await bot.say('Correct use of this function is: >setmemb <@person> <yes/no>')
+
 @bot.command(pass_context=True)
 async def redd(ctx):
 	if ctx == "rmeme":
