@@ -95,5 +95,3 @@ async def mute(ctx, user = None, hrs = None):
 		await client.send_message(report, content=user "**was temporarily silenced for" x "hours**"`, *, tts=False, embed=None)
 
 bot.run("<token>")
-
-#make sure to run in a terminal using the latest python while connected to the internet, or the bot will not be online
