@@ -21,35 +21,36 @@ async def clap(ctx, *, sentence : str = None):
 					
 @bot.command(pass_context=True)
 async def <role>(ctx):
-	user = message.author
-	for member.roles:
-		if role.name not "<role>":
+	for role.name in member.roles:
+		if role.name != "<role>":
 			await bot.say("Requesting promotion. Please wait for approval")
-			for role.name(<moderator>)
-				await client.send_message(channel.<"yourmodchannelhere">, content=user + "is requesting the <role name> role", *, tts=False, embed=None)
-		else await bot.say("You are already a <role>!")
+			await client.send_message(channel.<modonlychannelhere>, content=message.author "is requesting the <role name> role")
+		else:
+			await bot.say("You already are a <role>!")
 
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(manage_roles=True)
 async def givememb(ctx, user = None, yorn = None):
-	if yorn is None or if user is None:
+	if yorn is None:
+		await bot.say('Correct use of this function is: >setmemb <@person> <yes/no>')
+	elif user is None:
 		await bot.say('Correct use of this function is: >setmemb <@person> <yes/no>')
 	else:
 		if yorn is "yes":
-			add_roles(user, <role>)
-			await client.send_message(user, content="Your request for <role name> has been granted!", *, tts=False, embed=None)
+			add_roles(user, '<role>')
+			await client.send_message(user, content="Your request for <role name> has been granted!")
 		elif yorn is "no":
-			await client.send_message(user, content="Sorry, but your request for <role name> has been denied.", *, tts=False, embed=None)
+			await client.send_message(user, content="Sorry, but your request for <role name> has been denied.")
 
 @bot.command(pass_context=True)
 async def r(ctx):
-	if reddit is meme:
-		await client.send_message(message.channel, content="Wow, a random meme appeared from */r/memes*!", *, tts=False, embed="www.reddit.com/r/memes/random")
-	if reddit is random:
-		await client.send_message(message.channel, content="Get your daily dose of internet with a random *clean* post from Reddit!", *, tts=False, embed="www.reddit.com/random")
-	if reddit is all:
-		await client.send_message(message.channel, content="Find your thing with recent top *clean* posts from **all** of Reddit!", *, tts=False, embed="www.reddit.com/random")
-	if reddit is None:
+	if redditi is "meme":
+		await client.send_message(message.channel, content="Wow, a random meme appeared from */r/memes*!", embed="www.reddit.com/r/memes/random")
+	if redditi is "random":
+		await client.send_message(message.channel, content="Get your daily dose of internet with a random *clean* post from Reddit!", embed="www.reddit.com/random")
+	if redditi is "all":
+		await client.send_message(message.channel, content="Find your thing with recent top *clean* posts from **all** of Reddit!", embed="www.reddit.com/random")
+	if redditi is None:
 		reddit = "```Use the >r branch of commands to bring up a post (or Subreddit) from Reddit:" + "\n"
 		reddit += ">r all: Recent top posts from all of Reddit (clean)" + "\n"
 		reddit += ">r random: A random post from all of Reddit (clean)" + "\n"
