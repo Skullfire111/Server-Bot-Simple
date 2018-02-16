@@ -73,7 +73,7 @@ async def memes(ctx):
 				await asyncio.sleep(1)
 				m = m - 1
 			if m == 0:
-				await client.send_message(channel.memes, content=None, *, tts=False, embed="www.reddit.com/r/memes/random")
+				await client.send_message(channel.memes, content=None, embed="www.reddit.com/r/memes/random")
 				m = 3600
 			break
 	if torf is False:
@@ -81,18 +81,24 @@ async def memes(ctx):
 		
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(mute_user=True)
-async def mute(ctx, user = None, hrs = None):
-	if user is None or if hrs is None:
+async def mute(ctx, user, hrs):
+	if user is None:
 		bot.say('Correct usage is: >mute <@person> <hours>')
-	else:
-		t = hrs * 3600
+	elif hrs is None:
+		bot.say('Correct usage is: >mute <@person> <hours>')
+	else:	
+		time = hrs * 3600
 		while t	> 0:
 			if t > 0:
-				await asyncio.sleep(1)
+				asyncio.sleep(1)
 				t = t - 1
-			while t > 0:
-				if message.author is user:
-					await client.delete_message(message)
-		await client.send_message(report, content=user "**was temporarily silenced for" x "hours**"`, *, tts=False, embed=None)
+		while t > 0:
+			mute.muteuser(user)
+		muted = user + "\n"
+		muted += "was temorarily silenced for" + "\n"
+		muted += hrs
+		muted += "hours."
+		await client.send_message(channel.report, content=muted)
+
 
 bot.run("<token>")
