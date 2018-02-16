@@ -8,7 +8,7 @@ from discord.ext import commands
 bot = commands.Bot(command_prefix= '>')
 
 @bot.command(pass_context=True)
-async def help(ctx):
+async def h(ctx):
 	helptxt.run(h)
 		
 @bot.command(pass_context=True)
