@@ -43,13 +43,7 @@ async def givememb(ctx, user = None, yorn = None):
 			await client.send_message(user, content="Sorry, but your request for <role name> has been denied.")
 
 @bot.command(pass_context=True)
-async def r(ctx):
-	if redditi is "meme":
-		await client.send_message(message.channel, content="Wow, a random meme appeared from */r/memes*!", embed="www.reddit.com/r/memes/random")
-	if redditi is "random":
-		await client.send_message(message.channel, content="Get your daily dose of internet with a random *clean* post from Reddit!", embed="www.reddit.com/random")
-	if redditi is "all":
-		await client.send_message(message.channel, content="Find your thing with recent top *clean* posts from **all** of Reddit!", embed="www.reddit.com/random")
+async def r(ctx, redditi = None):
 	if redditi is None:
 		reddit = "```Use the >r branch of commands to bring up a post (or Subreddit) from Reddit:" + "\n"
 		reddit += ">r all: Recent top posts from all of Reddit (clean)" + "\n"
@@ -60,7 +54,12 @@ async def r(ctx):
 		reddit += ">memes: Toggle on/off random hourly posts from /r/memes" + "\n"
 		reddit += "```"
 		await bot.say(reddit)
-
+	elif redditi is "meme":
+		await client.send_message(message.channel, content="Wow, a random meme appeared from */r/memes*!", embed="www.reddit.com/r/memes/random")
+	elif redditi is "random":
+		await client.send_message(message.channel, content="Get your daily dose of internet with a random *clean* post from Reddit!", embed="www.reddit.com/random")
+	elif redditi is "all":
+		await client.send_message(message.channel, content="Find your thing with recent top *clean* posts from **all** of Reddit!", embed="www.reddit.com/random")
 		
 @bot.command(pass_context=True)
 @checks.admin_or_permissions(manage_server=True)
