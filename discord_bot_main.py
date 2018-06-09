@@ -1,10 +1,11 @@
 import discord
-import praw
 import random
 import asyncio
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix= '>')
+
+bot.remove_command('help')
 
 @bot.event
 async def on_ready():
@@ -12,37 +13,31 @@ async def on_ready():
 	print(discord.__version__)
 	print('-----')
 
-	global memes
-	global pmr
 	global report
-	global torf
 	global modlog
 	global bestof
 	global worstof
 	global guild
-	global modlist
+	global owner
 
-	torf = False
-	pmr = 307110698322886658
-	memes = 420307378093817856
 	report = 410902743515922432
 	modlog = 421900373507309569
 	bestof = 420038191329050634
 	worstof = 421509130235412480
 	guild = 302191095184621568
-	modlist = []
+	owner = 283353337292783616
 	
 	modlogchannel = bot.get_channel(modlog)
 	lm = 'Logged in as: \n **'
 	lm += bot.user.display_name
 	lm += '** \n **'
 	lm += str(bot.user.id)
-	lm += '** \n \n using: \n `'
+	lm += '** \n \n Using: \n `'
 	lm += 'discord.py version '
 	lm += discord.__version__
 	lm += '`'
 	
-	em = discord.Embed(title=':white_check_mark: **CONECTED**', description=lm, colour=0x9900e5)
+	em = discord.Embed(title=':white_check_mark: **CONECTED**', description=lm, colour=0x9b59b6)
 	em.set_author(name=bot.user.name, icon_url=bot.user.avatar_url)
 
 	await modlogchannel.send(embed=em)
@@ -115,17 +110,18 @@ async def on_raw_reaction_add(reaction, messageid, channelid, member):
 		return
 	bestofc = bot.get_channel(bestof)
 	worstofc = bot.get_channel(worstof)
-	if member == 283353337292783616:
+	if member == message.guild.owner_id:
 		if reaction.name == '⭐':
 			if str(messageid) in open('bestof.txt').read():
 				pass
 			else:
-				mt = ':ok_hand: Good Meme :ok_hand:'
+				mt = ':ok_hand: Good Post :ok_hand:'
 
 				mc = message.content
 
 				em = discord.Embed(title=mt, description=mc, colour=0xbc52ec)
 				em.set_author(name=message.author.display_name, icon_url=message.author.avatar_url)
+				em.set_footer(text='This meme recieved a star from {}!'.format(message.guild.owner.display_name))
 				try:
 					if message.content.startswith('https://'):
 						em.set_image(url=message.content)
@@ -135,7 +131,7 @@ async def on_raw_reaction_add(reaction, messageid, channelid, member):
 					attach = message.attachments
 					em.set_image(url = attach[0].url)
 				except:
-					pass	
+					pass
 
 				await bestofc.send(embed = em)
 				cache = open("bestof.txt", "a+",encoding="utf8")
@@ -173,10 +169,13 @@ async def on_raw_reaction_add(reaction, messageid, channelid, member):
 					pass
 				else:
 					print('bestof')
-					mc = ':ok_hand: Good Meme :ok_hand:'
+					mt = ':ok_hand: Good Post :ok_hand:'
 
-					em = discord.Embed(title=mc, description=message.content, colour=0xbc52ec)
+					mc = message.content
+
+					em = discord.Embed(title=mt, description=mc, colour=0xbc52ec)
 					em.set_author(name=message.author.display_name, icon_url=message.author.avatar_url)
+					em.set_footer(text='This meme recieved enough stars to make it into #bestof')
 					try:
 						if message.content.startswith('https://'):
 							em.set_image(url=message.content)
@@ -186,7 +185,7 @@ async def on_raw_reaction_add(reaction, messageid, channelid, member):
 						attach = message.attachments
 						em.set_image(url = attach[0].url)
 					except:
-						pass	
+						pass
 
 					await bestofc.send(embed = em)
 					cache = open("bestof.txt", "a+",encoding="utf8")
@@ -197,9 +196,11 @@ async def on_raw_reaction_add(reaction, messageid, channelid, member):
 				if str(messageid) in open('worstof.txt').read():
 					pass
 				else:
-					mc = '👺 Shitpost 👺'
+					mt = '👺 Shitpost 👺'
 
-					em = discord.Embed(title=mc, description=message.content, colour=0x3f90ff)
+					mc = message.content
+
+					em = discord.Embed(title=mt, description=mc, colour=0x3f90ff)
 					em.set_author(name=message.author.display_name, icon_url=message.author.avatar_url)
 					try:
 						if message.content.startswith('https://'):
@@ -227,11 +228,11 @@ async def on_message_delete(message):
 	modlogchannel = bot.get_channel(modlog)
 	channel = message.channel.name
 
-	mc = 'Deleted Message in #'
-	mc += channel
-	mc += ':'
+	mt = 'Deleted Message in #{}:'.format(channel)
 
-	em = discord.Embed(title=mc, description=message.content, colour=0xe74c3c)
+	mc = message.content
+
+	em = discord.Embed(title=mt, description=mc, colour=0xe74c3c)
 	em.set_author(name=message.author.display_name, icon_url=message.author.avatar_url)
 	try:
 		if message.content.startswith('https://'):
@@ -243,14 +244,15 @@ async def on_message_delete(message):
 		em.set_image(url = attach[0].url)
 	except:
 		pass
-
 	await modlogchannel.send(embed = em)
 
 @bot.event
 async def on_message_edit(message, after):
 	modlogchannel = bot.get_channel(modlog)
 	if message.author.bot is True:
-		pass
+		return
+	elif message == after:
+		return
 	else:
 		channel = message.channel.name
 
@@ -280,107 +282,84 @@ async def on_message_edit(message, after):
 		await modlogchannel.send(embed = em)
 
 @bot.command(pass_context=True)
-async def h(ctx):
-	helpm = "```-------------------------Help Guide-------------------------" + "\n"
-	helpm += "\n"
-	helpm += "---------------Roles---------------" + "\n"
-	helpm += ">member: Checks if you have the 'Wet Memer' role" + "\n"
-	helpm += "         Also can be used to request the role" + "\n"
-	helpm += "\n"
-	helpm += ">setmemb: An Admin-only command used to grant membership" + "\n"
-	helpm += "\n"
-	helpm += "---------------Fun Commands---------------" + "\n"
-	helpm += "\n"
-	helpm += ">clap <message>: Turns the spaces in any message to clap emojis" + "\n"
-	helpm += "\n"
-	helpm += ">r: Shows the Reddit-command help menu" + "\n"
-	helpm += "\n"
-	helpm += ">rall: Recent top posts from all of Reddit (clean)" + "\n"
-	helpm += "\n"
-	helpm += ">rrandom: A random post from all of Reddit (clean)" + "\n"
-	helpm += "\n"
-	helpm += ">rmeme: A random post from the /r/memes Subreddit (possibly NSFW)" + "\n"
-	helpm += "" + "\n"
-	helpm += "---------------Admin and Mod Commands---------------" + "\n"
-	helpm += "\n"
-	helpm += ">memes: Toggle on/off random hourly posts from /r/memes" + "\n"
-	helpm += "\n"
-	helpm += ">mute: Used to temporarily mute any amount of hours" + "\n"
-	helpm += "       The number of hours you wish to mute someone must be an integer" + "\n"
-	helpm += "```"
-	await ctx.send(helpm)
+async def help(ctx):
+	b = bot.user.display_name
+	helpt = "Commands for "
+	helpt += b
+	helpt += ": \n \n"
+
+	helpm = """**FUN COMMANDS:**
+	`>clap <message>`: sends a fun message with clap emojis
+	`>mock <message>`: sends a fun message with letters randomly turned uppercase and lowercase
+	
+	**UTILITY COMMANDS:**
+	`>roles [user]`: sends the list of roles for the server, or for the specified user, along with their IDs \n
+	
+	**MODERATION ONLY:**
+	`>mute <user> <s/m/h/d> [reason]`: mutes the user for the specified amount of time
+	`>unmute <user>`: unmutes the specified muted user
+	
+	*<> = necessary          [] = optional*"""
+
+	em = discord.Embed(title=helpt, description=helpm, colour=0x9b59b6)
+	em.set_author(name=bot.user.name, icon_url=bot.user.avatar_url)
+
+	await ctx.send(embed=em)
 
 @bot.command()
 async def clap(ctx, *, sentence : str = None):
-    if sentence is None:
-        await ctx.send('You have to say something before this command works')
-    else:
-        sentence = sentence.replace(' ', ':clap:')
-        sentence += ':clap:'
-        await ctx.send(sentence)
+	if sentence is None:
+		await ctx.send('You have to say something before this command works')
+	else:
+		sentencetemp = sentence.replace(' ', ':clap:')
+		sentence = ':clap:'
+		sentence += sentencetemp
+		sentence += ':clap:'
+		await ctx.send(sentence)
 
 @bot.command()
 async def smh(ctx, *, headshake : str = None):
 	if headshake is None:
 		await ctx.send('You have to say something before this command works')
 	else:
-		headshake = headshake.replace('smh', 'shaking my smh')
+		headshake = headshake.replace('smh', 'smh my head')
 		headshake += ' smh'
 		await ctx.send(headshake)
 
 @bot.command()
-async def r(ctx, ri : str = None):
-	if ri is None:
-		reddit = "```Use the >r branch of commands to bring up a post (or Subreddit) from Reddit:" + "\n"
-		reddit += ">r all: Recent top posts from all of Reddit (clean)" + "\n"
-		reddit += ">r random: A random post from all of Reddit (clean)" + "\n"
-		reddit += ">r meme: A random post from the /r/memes Subreddit (possibly NSFW)" + "\n"
-		reddit += "\n"
-		reddit += "-Admins Only-" + "\n"
-		reddit += ">memes: Toggle on/off random hourly posts from /r/memes" + "\n"
-		reddit += "```"
-		await ctx.send(reddit)
+async def mock(ctx, *, mocktxt : str = None):
+	if mocktxt == None:
+		await ctx.send('You have to say something before this command works')
 	else:
-		if ri is "meme":
-			subreddit = reddit.subreddit('me_irl')
-			submission = subreddit.get_random_submission
-			meme = submission.url
-			await ctx.send("Wow, a random meme appeared from */r/me_irl*!")
-			await ctx.send(meme)
-		elif ri is "random":
-			subreddit = reddit.subreddit('all')
-			submission = subreddit.get_random_submission
-			random = submission.url
-			await ctx.send("Get your daily dose of internet with a random *clean* post from Reddit!")
-			await ctx.send(random)
-		elif ri is "all":
-			await ctx.send("Find your thing with recent top *clean* posts from **all** of Reddit!")
-			subreddit = reddit.subreddit('all')
-			for i in subreddit.hot(limit = 5):
-				all = i.url
-				await ctx.send(all)
+		list = []
+		for i in mocktxt:
+			list += i
+			for i in range(len(list)):
+				p = random.randint(1, 100)
+				if p < 51:
+					list[i] = list[i].lower()
+				else:
+					list[i] = list[i].upper()
+		mocktxtnew = ''
+		for i in list:
+			mocktxtnew += i
+		await ctx.send(mocktxtnew)
 
 @bot.command()
-@commands.has_permissions(manage_messages=True)
-async def memes(ctx):
-	memechannel = bot.get_channel(memes)
-	if torf is True:
-		ctx.send('The \"Hourly Memes\" function has been toggled on.')
-		torf = False
-		while True:
-			subreddit = reddit.subreddit('me_irl')
-			submission = subreddit.get_random_submission
-			meme = submission.url
-			await memechannel.send(meme)
-			await asyncio.sleep(3600)
-	else:
-		await ctx.send('The \"Hourly Memes\" function has been toggled off.')
-		torf = True
-		
-@memes.error
-async def memes_error(ctx, error):
-	if isinstance(error, commands.errors.MissingPermissions):
-		await ctx.send(':x: You do not have permission to use this command!')
+async def moan(ctx):
+	x = random.choice([1, 2, 3, 4])
+	if x == 1:
+		moan = '***OOOoOOOOOOooOoOhHh***'
+	if x == 2:
+		moan = '***AaaAAAAAaaaaAAAA***'
+	if x == 3:
+		moan = '***UUUUUuuuUuUUuUUUuUUUUhhhhhhh***'
+	if x == 4:
+		if random.random() < 0.1:
+			moan = '***Uuuhh UUH UuH AAh OOh Uuh YuuuHHHH MMMMMMMMMH***'
+		else:
+			moan = random.choice(['***OOOoOOOOOOooOoOhHh***', '***AaaAAAAAaaaaAAAA***', '***UUUUUuuuUuUUuUUUuUUUUhhhhhhh***'])
+	await ctx.send(moan)
 
 @bot.command()
 async def roles(ctx, user : discord.Member = None):
@@ -428,6 +407,7 @@ async def roles(ctx, user : discord.Member = None):
 		em = discord.Embed(title=title, description=rolelist, colour=0x4cff30)
 		em.set_author(name=user.display_name, icon_url=user.avatar_url)	
 		await ctx.send(embed=em)
+
 
 @bot.command(pass_context=True)
 @commands.has_permissions(manage_messages=True)
